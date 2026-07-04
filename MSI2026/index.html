@@ -1,0 +1,672 @@
+<title>MSI 2026 Bracket — Daejeon</title>
+<style>
+  :root{
+    --ink:#12161f;
+    --ink-soft:#1c2230;
+    --paper:#eef0f4;
+    --paper-raised:#ffffff;
+    --line:#c7cdd9;
+    --text:#1a1e28;
+    --text-dim:#5b6373;
+    --accent:#c8952f;
+    --accent-soft:#efd9a8;
+    --lower:#2f8f88;
+    --lower-soft:#bfe3df;
+    --eliminated:#8b8f98;
+    --tbd:#9aa1ad;
+    --focus:#3b6fd6;
+
+    --lpl:#d6473f;
+    --lck:#3b6fd6;
+    --lec:#8a5cf6;
+    --lcs:#e0763c;
+    --lcp:#c93e94;
+    --cblol:#2f9e56;
+
+    --font-display:'Archivo Black','Arial Black',sans-serif;
+    --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:'Cascadia Code','Cascadia Mono',Consolas,Menlo,monospace;
+  }
+
+  :root[data-theme="dark"]{
+    --paper:#12161f;
+    --paper-raised:#1a2029;
+    --line:#323a4a;
+    --text:#e8eaf0;
+    --text-dim:#8b93a4;
+    --accent:#e0ab4a;
+    --accent-soft:#4a3d20;
+    --lower:#4bb3ab;
+    --lower-soft:#1c3634;
+    --eliminated:#5b6170;
+    --tbd:#5b6170;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#12161f;
+      --paper-raised:#1a2029;
+      --line:#323a4a;
+      --text:#e8eaf0;
+      --text-dim:#8b93a4;
+      --accent:#e0ab4a;
+      --accent-soft:#4a3d20;
+      --lower:#4bb3ab;
+      --lower-soft:#1c3634;
+      --eliminated:#5b6170;
+      --tbd:#5b6170;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.45;
+  }
+
+  .page{max-width:1400px;margin:0 auto;padding:0 0 4rem;}
+
+  /* ---------- Header ---------- */
+  header.hero{
+    background:
+      radial-gradient(1100px 340px at 15% -20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent),
+      radial-gradient(900px 300px at 100% 0%, color-mix(in srgb, var(--lower) 18%, transparent), transparent),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+    color:#f2f3f6;
+    padding:3rem 2rem 2.25rem;
+    border-bottom:3px solid var(--accent);
+  }
+  .hero-inner{max-width:1400px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 0.6rem;
+  }
+  h1.title{
+    font-family:var(--font-display);
+    font-size:clamp(2.4rem, 5vw, 4rem);
+    letter-spacing:0.01em;
+    margin:0 0 0.5rem;
+    text-wrap:balance;
+    line-height:0.98;
+  }
+  .subtitle{
+    font-size:1.05rem;
+    color:#c7cce0;
+    margin:0 0 1.5rem;
+    max-width:60ch;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem 1.2rem;
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    color:#dfe2ee;
+  }
+  .meta-row span b{color:#fff;font-weight:600;}
+
+  /* ---------- Section labels ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.75rem;
+    margin:2.75rem 2rem 1rem;
+  }
+  .section-head h2{
+    font-family:var(--font-display);
+    font-size:1.3rem;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+  .section-head .rule{flex:1;height:1px;background:var(--line);}
+  .section-note{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    margin:0 2rem 1.25rem;
+    max-width:75ch;
+  }
+
+  /* ---------- Play-in strip ---------- */
+  .playin-wrap{
+    margin:0 2rem;
+    overflow-x:auto;
+    padding-bottom:0.25rem;
+  }
+  .playin-track{
+    display:flex;
+    gap:1rem;
+    min-width:max-content;
+  }
+  .pi-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:0.7rem 0.9rem;
+    min-width:190px;
+  }
+  .pi-round-label{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--text-dim);
+    margin-bottom:0.4rem;
+  }
+  .pi-row{
+    display:flex;
+    justify-content:space-between;
+    gap:0.5rem;
+    padding:0.15rem 0;
+    font-size:0.88rem;
+  }
+  .pi-row.winner{font-weight:700;}
+  .pi-row.loser{color:var(--eliminated); text-decoration:line-through; text-decoration-color:var(--eliminated); text-decoration-thickness:1px;}
+  .pi-score{font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--text-dim);}
+
+  /* ---------- Legend ---------- */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.4rem 1rem;
+    margin:0 2rem 0.5rem;
+    font-size:0.78rem;
+    color:var(--text-dim);
+    align-items:center;
+  }
+  .legend .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:0.35rem;
+  }
+  .swatch{width:0.65rem;height:0.65rem;border-radius:2px;display:inline-block;}
+
+  /* ---------- Bracket ---------- */
+  .bracket-scroll{
+    overflow-x:auto;
+    margin:0 1rem;
+    padding:0.5rem 1rem 1.5rem;
+  }
+  .bracket{
+    display:flex;
+    flex-direction:column;
+    gap:2.5rem;
+    min-width:1180px;
+  }
+  .bracket-half{
+    display:grid;
+    grid-template-columns:220px 220px 220px 220px;
+    gap:0 2.6rem;
+    align-items:stretch;
+  }
+
+  .col{display:flex; flex-direction:column; justify-content:space-around; gap:1.4rem; position:relative;}
+  .col.center-col{justify-content:center;}
+  .col-label{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--text-dim);
+    text-align:center;
+    margin-bottom:0.5rem;
+  }
+
+  .match{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  }
+  .match.upper{border-top:3px solid var(--accent);}
+  .match.lower-b{border-top:3px solid var(--lower);}
+  .match.grand{border-top:3px solid var(--focus);}
+
+  .match-date{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:0.06em;
+    color:var(--text-dim);
+    padding:0.35rem 0.7rem 0.15rem;
+    text-transform:uppercase;
+  }
+
+  .slot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:0.5rem;
+    padding:0.42rem 0.7rem;
+    border-top:1px solid var(--line);
+    font-size:0.88rem;
+    cursor:default;
+    background:transparent;
+    width:100%;
+    text-align:left;
+    font-family:inherit;
+    color:inherit;
+  }
+  .slot:first-of-type{border-top:none;}
+  .slot .name{display:flex;align-items:center;gap:0.45rem; min-width:0;}
+  .slot .name .dot{width:0.5rem;height:0.5rem;border-radius:50%;flex:none;}
+  .slot .name span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .slot .score{font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--text-dim); flex:none;}
+
+  .slot.winner{font-weight:700;}
+  .slot.winner .score{color:var(--text);}
+  .slot.loser{color:var(--eliminated);}
+  .slot.loser .name span{text-decoration:line-through; text-decoration-color:var(--eliminated); text-decoration-thickness:1px;}
+  .slot.tbd{color:var(--tbd); font-style:italic;}
+
+  button.slot{
+    transition:background 0.12s ease;
+  }
+  button.slot:hover:not(:disabled){background:color-mix(in srgb, var(--focus) 12%, transparent);}
+  button.slot:focus-visible{outline:2px solid var(--focus); outline-offset:-2px;}
+  button.slot:disabled{cursor:default;}
+  button.slot .pick-hint{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    color:var(--text-dim);
+    opacity:0;
+    flex:none;
+  }
+  button.slot:hover:not(:disabled) .pick-hint{opacity:1;}
+
+  .match-tag{
+    position:absolute;
+    top:0.35rem;
+    right:0.6rem;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    gap:0.7rem;
+    align-items:center;
+    margin:1.5rem 2rem 0;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:0.5rem 0.9rem;
+    border-radius:7px;
+    cursor:pointer;
+  }
+  .btn:hover{border-color:var(--focus);}
+  .btn:focus-visible{outline:2px solid var(--focus); outline-offset:1px;}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#241a04;}
+  .hint-text{font-size:0.82rem; color:var(--text-dim);}
+
+  /* ---------- Champion banner ---------- */
+  .champion-banner{
+    margin:2.5rem 2rem 0;
+    padding:1.4rem 1.6rem;
+    border-radius:12px;
+    background:linear-gradient(120deg, color-mix(in srgb, var(--accent) 20%, var(--paper-raised)), var(--paper-raised));
+    border:1px solid var(--accent);
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .champion-banner .cb-label{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  .champion-banner .cb-name{
+    font-family:var(--font-display);
+    font-size:1.6rem;
+  }
+  .champion-banner.empty{
+    background:var(--paper-raised);
+    border-style:dashed;
+    border-color:var(--line);
+  }
+  .champion-banner.empty .cb-name{color:var(--tbd); font-family:var(--font-body); font-style:italic; font-size:1rem;}
+
+  footer.foot{
+    margin:3rem 2rem 0;
+    padding-top:1.2rem;
+    border-top:1px solid var(--line);
+    font-size:0.78rem;
+    color:var(--text-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.5rem;
+  }
+
+  @media (max-width:720px){
+    header.hero{padding:2.2rem 1.2rem 1.6rem;}
+    .section-head, .section-note, .controls, .champion-banner, footer.foot, .legend, .playin-wrap{margin-left:1.2rem; margin-right:1.2rem;}
+  }
+</style>
+
+<div class="page">
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">League of Legends &middot; Mid-Season Invitational</p>
+      <h1 class="title">MSI 2026 Bracket</h1>
+      <p class="subtitle">Double-elimination bracket stage, live from Daejeon. Completed series are locked in — pick winners for everything still undecided to trace a path to the title.</p>
+      <div class="meta-row">
+        <span>📍 <b>Daejeon, South Korea</b></span>
+        <span>🗓 <b>Jul 3–12, 2026</b></span>
+        <span>🏆 <b>$2,000,000</b> prize pool</span>
+        <span>⚔ <b>Bo5</b>, Fearless Draft</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="section-head"><h2>Play-In Stage</h2><div class="rule"></div></div>
+  <p class="section-note">Jun 28 – Jul 1. Four teams, one Bracket Stage berth. Every series ended 3-0 — T1 ran the table to claim LCK's second seed.</p>
+  <div class="playin-wrap">
+    <div class="playin-track">
+      <div class="pi-card">
+        <div class="pi-round-label">Round 1</div>
+        <div class="pi-row winner">T1 <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Team Liquid Alienware <span class="pi-score">0</span></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-round-label">Round 1</div>
+        <div class="pi-row winner">Karmine Corp <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Relove Deep Cross Gaming <span class="pi-score">0</span></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-round-label">Upper Final</div>
+        <div class="pi-row winner">T1 <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Karmine Corp <span class="pi-score">0</span></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-round-label">Lower Round 1</div>
+        <div class="pi-row winner">Team Liquid Alienware <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Relove Deep Cross Gaming <span class="pi-score">0</span></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-round-label">Lower Final</div>
+        <div class="pi-row winner">Team Liquid Alienware <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Karmine Corp <span class="pi-score">0</span></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-round-label">Play-In Final</div>
+        <div class="pi-row winner">T1 <span class="pi-score">3</span></div>
+        <div class="pi-row loser">Team Liquid Alienware <span class="pi-score">0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Bracket Stage</h2><div class="rule"></div></div>
+  <p class="section-note">8 teams, double elimination. Locked matches show final scores; everything else is a prediction — click a team to send it forward and watch the rest of the bracket update.</p>
+
+  <div class="legend">
+    <span class="tag"><span class="swatch" style="background:var(--lpl)"></span>LPL</span>
+    <span class="tag"><span class="swatch" style="background:var(--lck)"></span>LCK</span>
+    <span class="tag"><span class="swatch" style="background:var(--lec)"></span>LEC</span>
+    <span class="tag"><span class="swatch" style="background:var(--lcs)"></span>LCS</span>
+    <span class="tag"><span class="swatch" style="background:var(--lcp)"></span>LCP</span>
+    <span class="tag"><span class="swatch" style="background:var(--cblol)"></span>CBLOL</span>
+    <span class="tag" style="margin-left:0.6rem;">&mdash; <span style="color:var(--accent); font-weight:700;">gold</span> = upper bracket &nbsp;/&nbsp; <span style="color:var(--lower); font-weight:700;">teal</span> = lower bracket</span>
+  </div>
+
+  <div class="controls">
+    <button class="btn primary" id="autoFillBtn">Auto-advance higher seed</button>
+    <button class="btn" id="resetBtn">Reset predictions</button>
+    <span class="hint-text" id="statusHint"></span>
+  </div>
+
+  <div id="championSlot"></div>
+
+  <div class="bracket-scroll">
+    <div class="bracket" id="bracketRoot"></div>
+  </div>
+
+  <footer class="foot">
+    <span>Sources: Liquipedia, esports.gg, GosuGamers, Sheep Esports, eGamersWorld, LCK — collected Jul 4, 2026.</span>
+    <span>Predictions are stored only in this page and reset on reload.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const TEAMS = {
+    hle:  {name:'Hanwha Life Esports', region:'lck'},
+    tsw:  {name:'Team Secret Whales',  region:'lcp'},
+    g2:   {name:'G2 Esports',          region:'lec'},
+    tes:  {name:'Top Esports',         region:'lpl'},
+    lyon: {name:'LYON',                region:'lcs'},
+    fur:  {name:'FURIA',               region:'cblol'},
+    blg:  {name:'Bilibili Gaming',     region:'lpl'},
+    t1:   {name:'T1',                  region:'lck'},
+  };
+
+  // Each match: { id, side, date, a, b, result: {aScore,bScore,winner} | null, locked }
+  // a/b are either {team:'id'} or {from:'matchId', take:'w'|'l'}
+  const matches = {
+    ub1: {date:'Jul 3', a:{team:'hle'}, b:{team:'tsw'}, result:{aScore:3,bScore:0,winner:'a'}, locked:true},
+    ub2: {date:'Jul 3–4', a:{team:'g2'}, b:{team:'tes'}, result:{aScore:3,bScore:2,winner:'a'}, locked:true},
+    ub3: {date:'Jul 3–4', a:{team:'lyon'}, b:{team:'fur'}, result:{aScore:3,bScore:0,winner:'a'}, locked:true},
+    ub4: {date:'Jul 4', a:{team:'blg'}, b:{team:'t1'}, result:{aScore:3,bScore:2,winner:'a'}, locked:true},
+
+    ub5: {date:'Jul 5', a:{from:'ub1',take:'w'}, b:{from:'ub2',take:'w'}, result:null, locked:false},
+    ub6: {date:'Jul 6', a:{from:'ub3',take:'w'}, b:{from:'ub4',take:'w'}, result:null, locked:false},
+
+    ubf: {date:'Jul 9', a:{from:'ub5',take:'w'}, b:{from:'ub6',take:'w'}, result:null, locked:false},
+
+    lb1: {date:'Jul 5', a:{from:'ub1',take:'l'}, b:{from:'ub2',take:'l'}, result:null, locked:false},
+    lb2: {date:'Jul 6', a:{from:'ub3',take:'l'}, b:{from:'ub4',take:'l'}, result:null, locked:false},
+
+    lb3: {date:'Jul 8', a:{from:'lb1',take:'w'}, b:{from:'ub5',take:'l'}, result:null, locked:false},
+    lb4: {date:'Jul 8', a:{from:'lb2',take:'w'}, b:{from:'ub6',take:'l'}, result:null, locked:false},
+
+    lb5: {date:'TBD',  a:{from:'lb3',take:'w'}, b:{from:'lb4',take:'w'}, result:null, locked:false},
+
+    lbf: {date:'Jul 11', a:{from:'lb5',take:'w'}, b:{from:'ubf',take:'l'}, result:null, locked:false},
+
+    gf:  {date:'Jul 12', a:{from:'ubf',take:'w'}, b:{from:'lbf',take:'w'}, result:null, locked:false},
+  };
+
+  const STORE_KEY = 'msi2026-bracket-predictions';
+
+  function loadPredictions(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return;
+      const saved = JSON.parse(raw);
+      Object.keys(saved).forEach(id=>{
+        if(matches[id] && !matches[id].locked) matches[id].result = saved[id];
+      });
+    }catch(e){}
+  }
+
+  function savePredictions(){
+    const out = {};
+    Object.keys(matches).forEach(id=>{
+      if(!matches[id].locked && matches[id].result) out[id] = matches[id].result;
+    });
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(out)); }catch(e){}
+  }
+
+  function resolveSlot(slot){
+    if(slot.team) return slot.team;
+    const m = matches[slot.from];
+    if(!m.result) return null;
+    return slot.take === 'w' ? (m.result.winner==='a'?resolveSlot(m.a):resolveSlot(m.b))
+                              : (m.result.winner==='a'?resolveSlot(m.b):resolveSlot(m.a));
+  }
+
+  function teamDot(teamId){
+    const t = TEAMS[teamId];
+    return '<span class="dot" style="background:var(--'+t.region+')"></span>';
+  }
+
+  function setWinner(matchId, side){
+    const m = matches[matchId];
+    if(m.locked) return;
+    m.result = {aScore:null, bScore:null, winner:side};
+    // clear anything downstream that depended on a now-changed team, so stale picks don't linger
+    clearDownstream(matchId);
+    savePredictions();
+    render();
+  }
+
+  function clearDownstream(changedId){
+    Object.keys(matches).forEach(id=>{
+      const m = matches[id];
+      if(m.locked || !m.result) return;
+      const touches = (slot)=> slot.from === changedId;
+      if(touches(m.a) || touches(m.b)){
+        m.result = null;
+        clearDownstream(id);
+      }
+    });
+  }
+
+  function renderMatch(matchId, variant){
+    const m = matches[matchId];
+    const aId = resolveSlot(m.a);
+    const bId = resolveSlot(m.b);
+    const ready = aId && bId;
+    const interactive = !m.locked && ready;
+
+    function rowContent(teamId, isWinner, isLoser, score){
+      if(!teamId){
+        return '<span class="name tbd-text">TBD</span>';
+      }
+      const t = TEAMS[teamId];
+      return '<span class="name">'+teamDot(teamId)+'<span>'+t.name+'</span></span>'
+        + (score!=null ? '<span class="score">'+score+'</span>' : (interactive ? '<span class="pick-hint">pick →</span>' : ''));
+    }
+
+    function row(teamId, side){
+      const isWinner = m.result && m.result.winner===side;
+      const isLoser = m.result && m.result.winner && m.result.winner!==side;
+      const cls = ['slot'];
+      if(isWinner) cls.push('winner');
+      if(isLoser) cls.push('loser');
+      if(!teamId) cls.push('tbd');
+      const score = m.locked ? (side==='a'? m.result.aScore : m.result.bScore) : null;
+
+      if(interactive && !m.result){
+        return '<button type="button" class="'+cls.join(' ')+'" data-match="'+matchId+'" data-side="'+side+'">'+rowContent(teamId,false,false,score)+'</button>';
+      }
+      if(interactive && m.result){
+        // allow re-pick
+        return '<button type="button" class="'+cls.join(' ')+'" data-match="'+matchId+'" data-side="'+side+'">'+rowContent(teamId,isWinner,isLoser,score)+'</button>';
+      }
+      return '<div class="'+cls.join(' ')+'">'+rowContent(teamId,isWinner,isLoser,score)+'</div>';
+    }
+
+    const tagText = m.locked ? 'FINAL' : (m.result ? 'PREDICTED' : (ready ? 'PICK WINNER' : ''));
+
+    return '<div class="match '+variant+'">'
+      + '<div class="match-date">'+m.date+'</div>'
+      + (tagText ? '<div class="match-tag">'+tagText+'</div>' : '')
+      + row(aId,'a') + row(bId,'b')
+      + '</div>';
+  }
+
+  function render(){
+    const root = document.getElementById('bracketRoot');
+    root.innerHTML =
+      '<div class="bracket-half upper">'
+        + '<div class="col"><div class="col-label">Upper Round 1</div>'
+          + renderMatch('ub1','upper') + renderMatch('ub2','upper') + renderMatch('ub3','upper') + renderMatch('ub4','upper')
+        + '</div>'
+        + '<div class="col"><div class="col-label">Upper Round 2</div>'
+          + renderMatch('ub5','upper') + renderMatch('ub6','upper')
+        + '</div>'
+        + '<div class="col center-col"><div class="col-label">Upper Final</div>'
+          + renderMatch('ubf','upper')
+        + '</div>'
+        + '<div class="col center-col"><div class="col-label">Grand Final</div>'
+          + renderMatch('gf','grand')
+        + '</div>'
+      + '</div>'
+      + '<div class="bracket-half lower">'
+        + '<div class="col"><div class="col-label">Lower Round 1</div>'
+          + renderMatch('lb1','lower-b') + renderMatch('lb2','lower-b')
+        + '</div>'
+        + '<div class="col"><div class="col-label">Lower Round 2</div>'
+          + renderMatch('lb3','lower-b') + renderMatch('lb4','lower-b')
+        + '</div>'
+        + '<div class="col center-col"><div class="col-label">Lower Round 3</div>'
+          + renderMatch('lb5','lower-b')
+        + '</div>'
+        + '<div class="col center-col"><div class="col-label">Lower Final</div>'
+          + renderMatch('lbf','lower-b')
+        + '</div>'
+      + '</div>';
+
+    root.querySelectorAll('button.slot').forEach(btn=>{
+      btn.addEventListener('click', ()=> setWinner(btn.dataset.match, btn.dataset.side));
+    });
+
+    const champ = resolveSlot({from:'gf',take:'w'});
+    const cs = document.getElementById('championSlot');
+    if(champ){
+      const t = TEAMS[champ];
+      cs.innerHTML = '<div class="champion-banner"><span class="cb-label">Projected Champion</span><span class="cb-name">'+teamDot(champ)+' '+t.name+'</span></div>';
+    } else {
+      cs.innerHTML = '<div class="champion-banner empty"><span class="cb-label">Projected Champion</span><span class="cb-name">Make picks below to project a winner</span></div>';
+    }
+
+    const pending = Object.keys(matches).filter(id=>!matches[id].locked && !matches[id].result).length;
+    document.getElementById('statusHint').textContent = pending===0 ? 'All rounds predicted.' : pending+' match'+(pending===1?'':'es')+' left to call.';
+  }
+
+  function autoAdvanceHigherSeed(){
+    // seed order = order teams first appear in ub1..ub4 (a simple upper-bracket-position proxy)
+    const seedOrder = ['hle','tsw','g2','tes','lyon','fur','blg','t1'];
+    const rank = id => seedOrder.indexOf(id);
+    let changed = true;
+    let guard = 0;
+    while(changed && guard < 20){
+      changed = false; guard++;
+      Object.keys(matches).forEach(id=>{
+        const m = matches[id];
+        if(m.locked || m.result) return;
+        const aId = resolveSlot(m.a), bId = resolveSlot(m.b);
+        if(aId && bId){
+          const side = rank(aId) <= rank(bId) ? 'a' : 'b';
+          m.result = {aScore:null,bScore:null,winner:side};
+          changed = true;
+        }
+      });
+    }
+    savePredictions();
+    render();
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    Object.keys(matches).forEach(id=>{ if(!matches[id].locked) matches[id].result = null; });
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    render();
+  });
+  document.getElementById('autoFillBtn').addEventListener('click', autoAdvanceHigherSeed);
+
+  loadPredictions();
+  render();
+})();
+</script>
